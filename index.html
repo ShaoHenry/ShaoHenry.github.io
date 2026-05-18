@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaoheng Xu — Audio & Acoustic Signal Processing</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+:root {
+  --bg:       #f5f4f0;
+  --bg2:      #eceae4;
+  --surface:  #ffffff;
+  --navy:     #1a3558;
+  --navy-mid: rgba(26,53,88,0.12);
+  --navy-dim: rgba(26,53,88,0.06);
+  --text:     #1c1f26;
+  --muted:    #5a6070;
+  --rule:     rgba(26,53,88,0.12);
+  --serif:    'EB Garamond', Georgia, serif;
+  --sans:     'IBM Plex Sans', system-ui, sans-serif;
+  --mono:     'IBM Plex Mono', monospace;
+  --max:      900px;
+  --pad:      clamp(1.25rem, 5vw, 3.5rem);
+}
+ 
+html { scroll-behavior: smooth; }
+ 
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15.5px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+ 
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--pad);
+  height: 58px;
+  background: rgba(245,244,240,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo {
+  font-family: var(--mono); font-size: 13px;
+  color: var(--navy); text-decoration: none; letter-spacing: .03em;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: var(--sans); font-size: 13px; font-weight: 400;
+  color: var(--muted); text-decoration: none; transition: color .15s;
+}
+.nav-links a:hover { color: var(--navy); }
+@media (max-width: 540px) { .nav-links { gap: 1.2rem; } }
+ 
+/* SECTION WRAPPER */
+.wrap {
+  max-width: calc(var(--max) + 8rem);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+ 
+/* HERO */
+#hero {
+  padding-top: 6.5rem; padding-bottom: 4.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+ 
+.photo-slot { display: flex; flex-direction: column; align-items: center; gap: .7rem; }
+.photo-frame {
+  width: 160px; height: 160px; border-radius: 50%;
+  background: var(--bg2);
+  border: 2px dashed rgba(26,53,88,0.22);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .35rem; overflow: hidden;
+}
+/* To use your photo, replace .photo-frame with:
+   <img src="photo.jpg" alt="Shaoheng Xu"
+        style="width:160px;height:160px;border-radius:50%;object-fit:cover;"> */
+.photo-frame svg { opacity: .28; }
+.photo-hint {
+  font-family: var(--mono); font-size: 9.5px;
+  color: var(--muted); text-align: center; line-height: 1.5; opacity: .6;
+}
+ 
+.hero-affil {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .07em;
+  color: var(--navy); text-transform: uppercase; opacity: .65;
+  margin-bottom: .9rem;
+  display: flex; align-items: center; gap: .6rem;
+}
+.hero-affil::before { content: ''; width: 22px; height: 1px; background: var(--navy); opacity: .5; }
+h1 {
+  font-family: var(--serif); font-size: clamp(2.3rem, 5vw, 3.6rem);
+  font-weight: 400; line-height: 1.1; letter-spacing: -.01em;
+  color: var(--text); margin-bottom: .8rem;
+}
+.hero-role {
+  font-family: var(--serif); font-size: 1.05rem; font-style: italic;
+  color: var(--muted); margin-bottom: 1.3rem;
+}
+.hero-bio {
+  font-size: .9rem; color: var(--muted); max-width: 500px;
+  line-height: 1.85; margin-bottom: 1.8rem;
+}
+.hero-links { display: flex; gap: .7rem; flex-wrap: wrap; }
+.btn {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  padding: .42rem 1.1rem; border-radius: 3px;
+  text-decoration: none; transition: all .15s; display: inline-block;
+  letter-spacing: .02em;
+}
+.btn-primary { background: var(--navy); color: #fff; border: 1px solid var(--navy); }
+.btn-primary:hover { background: #122947; }
+.btn-ghost { color: var(--navy); border: 1px solid rgba(26,53,88,0.28); background: transparent; }
+.btn-ghost:hover { background: var(--navy-dim); }
+ 
+/* SECTION COMMONS */
+.sec {
+  padding-top: 4.5rem; padding-bottom: 4.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.sec:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+  color: var(--navy); text-transform: uppercase; opacity: .55;
+  margin-bottom: .45rem;
+}
+h2 {
+  font-family: var(--serif); font-size: clamp(1.55rem, 3.5vw, 2.1rem);
+  font-weight: 400; color: var(--text); margin-bottom: 2.2rem;
+  padding-bottom: .85rem; border-bottom: 1px solid var(--rule);
+}
+ 
+/* ABOUT */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+}
+@media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.about-text p { color: var(--muted); margin-bottom: 1rem; font-size: .9rem; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+ 
+.info-block { display: flex; flex-direction: column; gap: 1.7rem; }
+.info-group-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  color: var(--navy); text-transform: uppercase; opacity: .55;
+  margin-bottom: .5rem;
+}
+.info-item {
+  display: flex; align-items: baseline; gap: .55rem;
+  font-size: .87rem; color: var(--muted); margin-bottom: .22rem;
+}
+.info-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--navy); opacity: .32; flex-shrink: 0; position: relative; top: -1px;
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .4rem; }
+.chip {
+  font-family: var(--mono); font-size: 10px;
+  padding: 2px 8px; border-radius: 2px;
+  background: var(--navy-dim); color: var(--navy);
+  border: 1px solid var(--navy-mid);
+}
+ 
+/* PUBLICATIONS */
+#publications { background: var(--surface); }
+.pub-list { display: flex; flex-direction: column; gap: 0; }
+.pub-card {
+  display: grid; grid-template-columns: 148px 1fr;
+  gap: 1.6rem; padding: 1.9rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-card:first-child { padding-top: 0; }
+.pub-card:last-child { border-bottom: none; padding-bottom: 0; }
+@media (max-width: 600px) { .pub-card { grid-template-columns: 1fr; gap: .9rem; } }
+ 
+.pub-teaser {
+  width: 148px; aspect-ratio: 4/3;
+  background: var(--bg2);
+  border: 1.5px dashed rgba(26,53,88,0.18);
+  border-radius: 4px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .3rem; flex-shrink: 0; overflow: hidden;
+}
+/* To use a real teaser image, replace .pub-teaser contents with:
+   <img src="teasers/yourpaper.png" alt="paper title teaser"
+        style="width:100%;height:100%;object-fit:cover;border-radius:3px;"> */
+.pub-teaser svg { opacity: .22; }
+.pub-teaser-hint {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); text-align: center; opacity: .55; line-height: 1.4;
+}
+ 
+.pub-meta {
+  display: flex; align-items: center; gap: .55rem;
+  margin-bottom: .45rem; flex-wrap: wrap;
+}
+.pub-year {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
+  color: var(--navy); background: var(--navy-dim);
+  border: 1px solid var(--navy-mid); padding: 1px 6px; border-radius: 2px;
+}
+.pub-venue { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.pub-badge-journal {
+  font-family: var(--mono); font-size: 10px;
+  color: #7a4f1a; background: rgba(180,120,40,0.1);
+  border: 1px solid rgba(180,120,40,0.2); padding: 1px 6px; border-radius: 2px;
+}
+.pub-title {
+  font-family: var(--serif); font-size: 1.04rem;
+  color: var(--text); line-height: 1.5; margin-bottom: .38rem;
+}
+.pub-authors { font-size: .8rem; color: var(--muted); line-height: 1.6; margin-bottom: .55rem; }
+.pub-authors em { font-style: normal; color: var(--text); font-weight: 500; }
+.pub-doi {
+  font-family: var(--mono); font-size: 10px; color: var(--navy);
+  text-decoration: none; opacity: .55; transition: opacity .15s;
+}
+.pub-doi:hover { opacity: 1; }
+ 
+/* EXPERIENCE */
+.exp-list { display: flex; flex-direction: column; }
+.exp-item {
+  display: grid; grid-template-columns: 130px 1fr;
+  gap: 2rem; padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.exp-item:last-child { border-bottom: none; }
+@media (max-width: 520px) { .exp-item { grid-template-columns: 1fr; gap: .35rem; } }
+.exp-period { font-family: var(--mono); font-size: 10px; color: var(--muted); padding-top: .2rem; line-height: 1.7; }
+.exp-role { font-weight: 500; font-size: .93rem; margin-bottom: .15rem; }
+.exp-place { font-size: .82rem; color: var(--navy); margin-bottom: .45rem; font-style: italic; }
+.exp-desc { font-size: .86rem; color: var(--muted); line-height: 1.75; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .65rem; }
+.exp-tag {
+  font-family: var(--mono); font-size: 9.5px;
+  padding: 2px 6px; border-radius: 2px;
+  border: 1px solid var(--rule); color: var(--muted);
+}
+ 
+/* AWARDS */
+#awards { background: var(--surface); }
+.awards-list { display: flex; flex-direction: column; margin-bottom: 2.5rem; }
+.award-item {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: 1.4rem; padding: 1.1rem 0;
+  border-bottom: 1px solid var(--rule); align-items: baseline;
+}
+.award-item:last-child { border-bottom: none; }
+.award-year { font-family: var(--mono); font-size: 10.5px; color: var(--navy); opacity: .55; }
+.award-name { font-size: .92rem; color: var(--text); font-weight: 500; }
+.award-org { font-size: .8rem; color: var(--muted); margin-top: .12rem; }
+ 
+.supervisors-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: .9rem;
+}
+.supervisor-card {
+  padding: 1rem 1.2rem;
+  background: var(--bg2); border-radius: 4px; border: 1px solid var(--rule);
+}
+.sup-name { font-weight: 500; font-size: .9rem; margin-bottom: .2rem; }
+.sup-role { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+.sup-email {
+  font-family: var(--mono); font-size: 9.5px; color: var(--navy);
+  text-decoration: none; margin-top: .4rem; display: block; opacity: .6;
+}
+.sup-email:hover { opacity: 1; }
+ 
+/* CONTACT */
+#contact { text-align: center; }
+.contact-inner { max-width: 460px; margin: 0 auto; }
+.contact-desc { font-size: .88rem; color: var(--muted); margin-bottom: 1.8rem; }
+.contact-links { display: flex; flex-wrap: wrap; gap: .65rem; justify-content: center; }
+.contact-link {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--navy); text-decoration: none;
+  padding: .38rem 1rem; border: 1px solid var(--navy-mid);
+  border-radius: 3px; transition: all .15s;
+}
+.contact-link:hover { background: var(--navy-dim); }
+ 
+/* GALLERY */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+@media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+ 
+.gallery-item {
+  position: relative; overflow: hidden; border-radius: 4px;
+  background: var(--bg2); border: 1.5px dashed rgba(26,53,88,0.18);
+  cursor: pointer;
+}
+.gallery-item.tall { grid-row: span 2; }
+ 
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .35s ease;
+}
+.gallery-item:hover img { transform: scale(1.04); }
+ 
+/* placeholder state (no img yet) */
+.gallery-placeholder {
+  aspect-ratio: 4/3; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .45rem;
+}
+.gallery-item.tall .gallery-placeholder { aspect-ratio: unset; min-height: 100%; }
+.gallery-placeholder svg { opacity: .2; }
+.gallery-placeholder-hint {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); opacity: .55; text-align: center; line-height: 1.5;
+}
+ 
+.gallery-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: .5rem .7rem;
+  background: linear-gradient(transparent, rgba(26,53,88,0.55));
+  font-family: var(--sans); font-size: 11px; color: #fff;
+  opacity: 0; transition: opacity .25s;
+  pointer-events: none;
+}
+.gallery-item:hover .gallery-caption { opacity: 1; }
+ 
+/* lightbox */
+#lightbox {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(20,24,32,0.88); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: min(90vw, 800px); max-height: 85vh;
+  border-radius: 6px; object-fit: contain;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+}
+#lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.8rem;
+  font-family: var(--mono); font-size: 22px; color: #fff;
+  background: none; border: none; cursor: pointer; opacity: .7;
+  line-height: 1; transition: opacity .15s;
+}
+#lightbox-close:hover { opacity: 1; }
+#lightbox-caption {
+  position: absolute; bottom: 2rem;
+  font-family: var(--sans); font-size: 13px; color: rgba(255,255,255,0.75);
+  text-align: center; padding: 0 2rem;
+}
+ 
+/* FOOTER */
+footer {
+  padding: 1.8rem var(--pad);
+  border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  flex-wrap: wrap; gap: .5rem;
+  max-width: calc(var(--max) + 8rem); margin: 0 auto;
+}
+ 
+/* FADE-IN */
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+ 
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg2); border-radius: 3px; }
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">shaoheng xu</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<div id="hero" class="wrap">
+  <div class="hero-grid">
+ 
+    <div class="photo-slot">
+      <div class="photo-frame">
+        <!-- REPLACE THIS BLOCK with your photo:
+          <img src="photo.jpg" alt="Shaoheng Xu"
+               style="width:160px;height:160px;border-radius:50%;object-fit:cover;">
+        -->
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.3">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <div class="photo-hint">your photo here</div>
+    </div>
+ 
+    <div>
+      <div class="hero-affil">PhD Candidate · The Australian National University</div>
+      <h1>Shaoheng Xu</h1>
+      <div class="hero-role">Audio &amp; Acoustic Signal Processing</div>
+      <p class="hero-bio">
+        Researching sparse sound field reconstruction, spatial audio rendering, and acoustic source tracking — bridging signal theory, harmonic analysis, and deep learning.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="#publications">Publications</a>
+        <a class="btn btn-ghost" href="mailto:shaoheng.xu@anu.edu.au">Email</a>
+        <a class="btn btn-ghost" href="https://github.com/ShaoHenry" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=HnOsHrsAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+ 
+<!-- ABOUT -->
+<div id="about" class="sec wrap">
+  <div class="section-label fade-in">About</div>
+  <h2 class="fade-in">Biography</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>
+        I am a PhD candidate in the <a href="https://engineering.anu.edu.au" target="_blank" rel="noopener">Research School of Engineering</a> at the Australian National University, supervised by Prof. Thushara Abhayapala, Dr. Jihui (Aimee) Zhang, and Prof. Prasanga Samarasinghe.
+      </p>
+      <p>
+        My research focuses on audio and acoustic signal processing — in particular, how to reconstruct continuous sound fields from sparse microphone observations, and how to render immersive spatial audio for binaural and surround playback.
+      </p>
+      <p>
+        In 2025, I interned at <strong>Tencent Music Entertainment (QQ Music)</strong> in Shenzhen, designing and developing a production spatial audio renderer. I hold a First-Class Honours B.E. from ANU, double-majored in Electronic &amp; Communication Systems and Mechatronic Systems (GPA 6.77/7).
+      </p>
+    </div>
+    <div class="info-block fade-in">
+      <div>
+        <div class="info-group-label">Research Interests</div>
+        <div class="info-item"><div class="info-dot"></div>Sound field reconstruction &amp; representation</div>
+        <div class="info-item"><div class="info-dot"></div>Spatial audio rendering (binaural &amp; surround)</div>
+        <div class="info-item"><div class="info-dot"></div>Room impulse response estimation</div>
+        <div class="info-item"><div class="info-dot"></div>Acoustic source localization &amp; tracking</div>
+        <div class="info-item"><div class="info-dot"></div>Sparse signal processing &amp; compressed sensing</div>
+      </div>
+      <div>
+        <div class="info-group-label">Education</div>
+        <div class="info-item"><div class="info-dot"></div>Ph.D. Engineering, ANU, 2021 – present</div>
+        <div class="info-item"><div class="info-dot"></div>B.E. (First-Class Honours), ANU, 2017 – 2021</div>
+      </div>
+      <div>
+        <div class="info-group-label">Technical Skills</div>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">MATLAB</span>
+          <span class="chip">C</span><span class="chip">PyTorch</span>
+          <span class="chip">SQL</span><span class="chip">LaTeX</span>
+          <span class="chip">Assembly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- PUBLICATIONS -->
+<div id="publications" class="sec wrap" style="background:var(--surface); max-width:100%; padding-left:0; padding-right:0;">
+  <div style="max-width:calc(var(--max) + 8rem); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);">
+    <div class="section-label fade-in">Research Output</div>
+    <h2 class="fade-in">Publications</h2>
+    <div class="pub-list">
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <!-- REPLACE with: <img src="teasers/rir-former.png" alt="RIR-FORMER teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"> -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2026</span>
+            <span class="pub-venue">ICASSP 2026</span>
+          </div>
+          <div class="pub-title">RIR-FORMER: Coordinate-guided transformer for continuous reconstruction of room impulse responses</div>
+          <div class="pub-authors"><em>S. Xu</em>, C. Sun, J. A. Zhang, P. N. Samarasinghe, T. D. Abhayapala</div>
+          <a class="pub-doi" href="https://doi.org/10.1109/ICASSP55912.2026.11462487" target="_blank" rel="noopener">doi: 10.1109/ICASSP55912.2026.11462487 ↗</a>
+        </div>
+      </div>
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2025</span>
+            <span class="pub-venue">APSIPA ASC 2025</span>
+          </div>
+          <div class="pub-title">Three-dimensional gradient-based tracking of multiple sound sources</div>
+          <div class="pub-authors"><em>S. Xu</em> et al.</div>
+          <a class="pub-doi" href="https://doi.org/10.1109/APSIPAASC65261.2025.11249221" target="_blank" rel="noopener">doi: 10.1109/APSIPAASC65261.2025.11249221 ↗</a>
+        </div>
+      </div>
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2024</span>
+            <span class="pub-venue">ICASSP 2024</span>
+          </div>
+          <div class="pub-title">Sparse sound field representation using complex orthogonal matching pursuit</div>
+          <div class="pub-authors"><em>S. Xu</em>, J. A. Zhang, T. D. Abhayapala, A. Bastine, W.-T. Lai, P. N. Samarasinghe</div>
+          <a class="pub-doi" href="https://doi.org/10.1109/ICASSP48485.2024.10445940" target="_blank" rel="noopener">doi: 10.1109/ICASSP48485.2024.10445940 ↗</a>
+        </div>
+      </div>
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2024</span>
+            <span class="pub-venue">IWAENC 2024</span>
+          </div>
+          <div class="pub-title">Iterative and complex orthogonal matching pursuit for broadband sparse sound field reconstruction</div>
+          <div class="pub-authors"><em>S. Xu</em>, J. A. Zhang, T. Abhayapala, A. Bastine, P. Samarasinghe</div>
+          <a class="pub-doi" href="https://doi.org/10.1109/IWAENC61483.2024.10694286" target="_blank" rel="noopener">doi: 10.1109/IWAENC61483.2024.10694286 ↗</a>
+        </div>
+      </div>
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2024</span>
+            <span class="pub-badge-journal">Journal</span>
+            <span class="pub-venue">Applied Sciences, vol. 14</span>
+          </div>
+          <div class="pub-title">Limitations and performance analysis of spherical sector harmonics for sound field processing</div>
+          <div class="pub-authors">H. Bi, <em>S. Xu</em>, F. Ma, T. D. Abhayapala, P. N. Samarasinghe</div>
+          <a class="pub-doi" href="https://doi.org/10.3390/app142210633" target="_blank" rel="noopener">doi: 10.3390/app142210633 ↗</a>
+        </div>
+      </div>
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2024</span>
+            <span class="pub-venue">ICASSPW 2024</span>
+          </div>
+          <div class="pub-title">A two-step approach for narrowband source localization in reverberant rooms</div>
+          <div class="pub-authors">W.-T. Lai, L. Birnie, T. Abhayapala, A. Bastine, <em>S. Xu</em>, P. Samarasinghe</div>
+          <a class="pub-doi" href="https://doi.org/10.1109/ICASSPW62465.2024.10627696" target="_blank" rel="noopener">doi: 10.1109/ICASSPW62465.2024.10627696 ↗</a>
+        </div>
+      </div>
+ 
+      <div class="pub-card fade-in">
+        <div class="pub-teaser">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="pub-teaser-hint">teaser image</div>
+        </div>
+        <div>
+          <div class="pub-meta">
+            <span class="pub-year">2023</span>
+            <span class="pub-venue">Forum Acusticum 2023</span>
+          </div>
+          <div class="pub-title">Virtual navigation via higher order distributed sound sources</div>
+          <div class="pub-authors">T. Abhayapala, J. Zhang, <em>S. Xu</em>, D. Alon, Z. Ben-Hur, P. Samarasinghe</div>
+          <a class="pub-doi" href="https://doi.org/10.61782/fa.2023.0942" target="_blank" rel="noopener">doi: 10.61782/fa.2023.0942 ↗</a>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+ 
+<!-- EXPERIENCE -->
+<div id="experience" class="sec wrap">
+  <div class="section-label fade-in">Work History</div>
+  <h2 class="fade-in">Experience</h2>
+  <div class="exp-list">
+ 
+    <div class="exp-item fade-in">
+      <div class="exp-period">Jul – Nov 2025</div>
+      <div>
+        <div class="exp-role">Audio Effects Development Intern</div>
+        <div class="exp-place">QQ Music · Tencent Music Entertainment Group · Shenzhen</div>
+        <div class="exp-desc">Designed and developed a spatial audio renderer supporting binaural and surround formats for one of the world's largest music streaming platforms.</div>
+      </div>
+    </div>
+ 
+    <div class="exp-item fade-in">
+      <div class="exp-period">Aug 2021 – present</div>
+      <div>
+        <div class="exp-role">PhD Candidate</div>
+        <div class="exp-place">Research School of Engineering · The Australian National University</div>
+        <div class="exp-desc">Researching audio and acoustic signal processing: sparse sound field reconstruction, continuous RIR estimation with transformer networks, and 3D multi-source tracking.</div>
+      </div>
+    </div>
+ 
+    <div class="exp-item fade-in">
+      <div class="exp-period">Feb 2020 – present</div>
+      <div>
+        <div class="exp-role">Teaching Assistant</div>
+        <div class="exp-place">School of Engineering · The Australian National University</div>
+        <div class="exp-desc">Supporting undergraduate and postgraduate students across eight engineering courses.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">COMP2610 Info Theory</span>
+          <span class="exp-tag">ENGN2228 Signals &amp; Systems</span>
+          <span class="exp-tag">ENGN3226 Digital Comms</span>
+          <span class="exp-tag">ENGN4537 DSP</span>
+          <span class="exp-tag">ENGN4536 Wireless Comms</span>
+          <span class="exp-tag">ENGN4213 Digital Systems</span>
+          <span class="exp-tag">ENGN2219 Computer Arch.</span>
+          <span class="exp-tag">ENGN1218 Electronics</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="exp-item fade-in">
+      <div class="exp-period">Nov 2019 – Feb 2020</div>
+      <div>
+        <div class="exp-role">Technology Intern</div>
+        <div class="exp-place">Wocaring Medical Equipment Co., Ltd. · Beijing</div>
+      </div>
+    </div>
+ 
+    <div class="exp-item fade-in">
+      <div class="exp-period">Feb – Mar 2017</div>
+      <div>
+        <div class="exp-role">R&amp;D Intern</div>
+        <div class="exp-place">Ninebot (Beijing) Tech Co., Ltd. · Beijing</div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+ 
+<!-- AWARDS -->
+<div id="awards" class="sec wrap" style="background:var(--surface); max-width:100%; padding-left:0; padding-right:0;">
+  <div style="max-width:calc(var(--max) + 8rem); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);">
+    <div class="section-label fade-in">Recognition</div>
+    <h2 class="fade-in">Awards &amp; Honours</h2>
+    <div class="awards-list">
+      <div class="award-item fade-in">
+        <div class="award-year">2021</div>
+        <div>
+          <div class="award-name">First Class Honours (H1)</div>
+          <div class="award-org">College of Engineering and Computer Science, The Australian National University</div>
+        </div>
+      </div>
+      <div class="award-item fade-in">
+        <div class="award-year">2020</div>
+        <div>
+          <div class="award-name">Humanitarian Innovation Award</div>
+          <div class="award-org">University of Sydney</div>
+        </div>
+      </div>
+      <div class="award-item fade-in">
+        <div class="award-year">2018</div>
+        <div>
+          <div class="award-name">Chancellor's Letters of Commendation</div>
+          <div class="award-org">The Australian National University</div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="section-label fade-in" style="margin-top:2.2rem; margin-bottom:.45rem;">PhD Supervisors</div>
+    <div class="supervisors-grid">
+      <div class="supervisor-card fade-in">
+        <div class="sup-name">Prof. Thushara Abhayapala</div>
+        <div class="sup-role">Professor, Research School of Engineering<br>The Australian National University</div>
+        <a class="sup-email" href="mailto:thushara.abhayapala@anu.edu.au">thushara.abhayapala@anu.edu.au</a>
+      </div>
+      <div class="supervisor-card fade-in">
+        <div class="sup-name">Dr. Jihui (Aimee) Zhang</div>
+        <div class="sup-role">Assistant Professor, EECS<br>The University of Queensland</div>
+        <a class="sup-email" href="mailto:jihuiaimee.zhang@uq.edu.au">jihuiaimee.zhang@uq.edu.au</a>
+      </div>
+      <div class="supervisor-card fade-in">
+        <div class="sup-name">Prof. Prasanga Samarasinghe</div>
+        <div class="sup-role">Associate Professor, Research School of Engineering<br>The Australian National University</div>
+        <a class="sup-email" href="mailto:prasanga.samarasinghe@anu.edu.au">prasanga.samarasinghe@anu.edu.au</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- CONTACT -->
+<div id="contact" class="sec wrap" style="text-align:center;">
+  <div class="contact-inner">
+    <div class="section-label fade-in" style="justify-content:center;">Contact</div>
+    <h2 class="fade-in" style="border:none; padding-bottom:0; margin-bottom:1rem;">Get in touch</h2>
+    <p class="contact-desc fade-in">
+      Open to research collaborations, academic discussions, and opportunities in spatial audio and acoustic signal processing.
+    </p>
+    <div class="contact-links fade-in">
+      <a class="contact-link" href="mailto:shaoheng.xu@anu.edu.au">shaoheng.xu@anu.edu.au</a>
+      <a class="contact-link" href="https://github.com/ShaoHenry" target="_blank" rel="noopener">GitHub</a>
+      <a class="contact-link" href="https://scholar.google.com/citations?user=HnOsHrsAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+    </div>
+  </div>
+</div>
+ 
+<!-- GALLERY -->
+<div id="gallery" class="sec wrap">
+  <div class="section-label fade-in">Personal</div>
+  <h2 class="fade-in">Photos</h2>
+ 
+  <div class="gallery-grid">
+ 
+    <!-- Item 1 — tall portrait slot -->
+    <div class="gallery-item tall fade-in" onclick="openLightbox(this)">
+      <!-- To use your photo: remove the .gallery-placeholder div below and add:
+           <img src="photos/photo1.jpg" alt="Your caption">
+           <div class="gallery-caption">Your caption</div>
+      -->
+      <div class="gallery-placeholder">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="gallery-placeholder-hint">photo 1<br>tall slot</div>
+      </div>
+    </div>
+ 
+    <!-- Item 2 -->
+    <div class="gallery-item fade-in" onclick="openLightbox(this)">
+      <div class="gallery-placeholder">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="gallery-placeholder-hint">photo 2</div>
+      </div>
+    </div>
+ 
+    <!-- Item 3 -->
+    <div class="gallery-item fade-in" onclick="openLightbox(this)">
+      <div class="gallery-placeholder">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="gallery-placeholder-hint">photo 3</div>
+      </div>
+    </div>
+ 
+    <!-- Item 4 -->
+    <div class="gallery-item fade-in" onclick="openLightbox(this)">
+      <div class="gallery-placeholder">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="gallery-placeholder-hint">photo 4</div>
+      </div>
+    </div>
+ 
+    <!-- Item 5 -->
+    <div class="gallery-item fade-in" onclick="openLightbox(this)">
+      <div class="gallery-placeholder">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="gallery-placeholder-hint">photo 5</div>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <p style="margin-top:1.4rem;font-family:var(--mono);font-size:10px;color:var(--muted);opacity:.6;line-height:1.8;">
+    To add photos: replace each <code>.gallery-placeholder</code> div with
+    <code>&lt;img src="photos/file.jpg" alt="caption"&gt;</code>
+    and a <code>&lt;div class="gallery-caption"&gt;caption&lt;/div&gt;</code> after it.
+    Item 1 uses <code>class="gallery-item tall"</code> for a portrait-oriented slot.
+  </p>
+</div>
+ 
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button id="lightbox-close" aria-label="Close">×</button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+ 
+<!-- FOOTER -->
+<footer>
+  <div>Shaoheng Xu · PhD Candidate, ANU · Audio &amp; Acoustic Signal Processing</div>
+  <div>© 2026</div>
+</footer>
+ 
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+ 
+function openLightbox(item) {
+  const img = item.querySelector('img');
+  if (!img) return;
+  const caption = item.querySelector('.gallery-caption');
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox-img').alt = img.alt;
+  document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if (e && e.target.tagName === 'IMG') return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
