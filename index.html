@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
 :root {
   --bg:       #f5f4f0;
   --bg2:      #eceae4;
@@ -24,9 +24,9 @@
   --max:      900px;
   --pad:      clamp(1.25rem, 5vw, 3.5rem);
 }
- 
+
 html { scroll-behavior: smooth; }
- 
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -35,7 +35,7 @@ body {
   line-height: 1.75;
   overflow-x: hidden;
 }
- 
+
 /* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -57,7 +57,7 @@ nav {
 }
 .nav-links a:hover { color: var(--navy); }
 @media (max-width: 540px) { .nav-links { gap: 1.2rem; } }
- 
+
 /* SECTION WRAPPER */
 .wrap {
   max-width: calc(var(--max) + 8rem);
@@ -65,7 +65,7 @@ nav {
   padding-left: var(--pad);
   padding-right: var(--pad);
 }
- 
+
 /* HERO */
 #hero {
   padding-top: 6.5rem; padding-bottom: 4.5rem;
@@ -80,7 +80,7 @@ nav {
 @media (max-width: 640px) {
   .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
- 
+
 .photo-slot { display: flex; flex-direction: column; align-items: center; gap: .7rem; }
 .photo-frame {
   width: 160px; height: 160px; border-radius: 50%;
@@ -98,7 +98,7 @@ nav {
   font-family: var(--mono); font-size: 9.5px;
   color: var(--muted); text-align: center; line-height: 1.5; opacity: .6;
 }
- 
+
 .hero-affil {
   font-family: var(--mono); font-size: 11px; letter-spacing: .07em;
   color: var(--navy); text-transform: uppercase; opacity: .65;
@@ -130,7 +130,7 @@ h1 {
 .btn-primary:hover { background: #122947; }
 .btn-ghost { color: var(--navy); border: 1px solid rgba(26,53,88,0.28); background: transparent; }
 .btn-ghost:hover { background: var(--navy-dim); }
- 
+
 /* SECTION COMMONS */
 .sec {
   padding-top: 4.5rem; padding-bottom: 4.5rem;
@@ -147,7 +147,7 @@ h2 {
   font-weight: 400; color: var(--text); margin-bottom: 2.2rem;
   padding-bottom: .85rem; border-bottom: 1px solid var(--rule);
 }
- 
+
 /* ABOUT */
 .about-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
@@ -156,7 +156,7 @@ h2 {
 .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: .9rem; }
 .about-text p:last-child { margin-bottom: 0; }
 .about-text a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
- 
+
 .info-block { display: flex; flex-direction: column; gap: 1.7rem; }
 .info-group-label {
   font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
@@ -178,7 +178,7 @@ h2 {
   background: var(--navy-dim); color: var(--navy);
   border: 1px solid var(--navy-mid);
 }
- 
+
 /* PUBLICATIONS */
 #publications { background: var(--surface); }
 .pub-list { display: flex; flex-direction: column; gap: 0; }
@@ -190,7 +190,7 @@ h2 {
 .pub-card:first-child { padding-top: 0; }
 .pub-card:last-child { border-bottom: none; padding-bottom: 0; }
 @media (max-width: 600px) { .pub-card { grid-template-columns: 1fr; gap: .9rem; } }
- 
+
 .pub-teaser {
   width: 148px; aspect-ratio: 4/3;
   background: var(--bg2);
@@ -208,7 +208,7 @@ h2 {
   font-family: var(--mono); font-size: 9px;
   color: var(--muted); text-align: center; opacity: .55; line-height: 1.4;
 }
- 
+
 .pub-meta {
   display: flex; align-items: center; gap: .55rem;
   margin-bottom: .45rem; flex-wrap: wrap;
@@ -235,7 +235,7 @@ h2 {
   text-decoration: none; opacity: .55; transition: opacity .15s;
 }
 .pub-doi:hover { opacity: 1; }
- 
+
 /* EXPERIENCE */
 .exp-list { display: flex; flex-direction: column; }
 .exp-item {
@@ -255,7 +255,7 @@ h2 {
   padding: 2px 6px; border-radius: 2px;
   border: 1px solid var(--rule); color: var(--muted);
 }
- 
+
 /* AWARDS */
 #awards { background: var(--surface); }
 .awards-list { display: flex; flex-direction: column; margin-bottom: 2.5rem; }
@@ -268,7 +268,7 @@ h2 {
 .award-year { font-family: var(--mono); font-size: 10.5px; color: var(--navy); opacity: .55; }
 .award-name { font-size: .92rem; color: var(--text); font-weight: 500; }
 .award-org { font-size: .8rem; color: var(--muted); margin-top: .12rem; }
- 
+
 .supervisors-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: .9rem;
@@ -284,7 +284,7 @@ h2 {
   text-decoration: none; margin-top: .4rem; display: block; opacity: .6;
 }
 .sup-email:hover { opacity: 1; }
- 
+
 /* CONTACT */
 #contact { text-align: center; }
 .contact-inner { max-width: 460px; margin: 0 auto; }
@@ -297,7 +297,7 @@ h2 {
   border-radius: 3px; transition: all .15s;
 }
 .contact-link:hover { background: var(--navy-dim); }
- 
+
 /* GALLERY */
 .gallery-grid {
   display: grid;
@@ -305,20 +305,20 @@ h2 {
   gap: .75rem;
 }
 @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
- 
+
 .gallery-item {
   position: relative; overflow: hidden; border-radius: 4px;
   background: var(--bg2); border: 1.5px dashed rgba(26,53,88,0.18);
   cursor: pointer;
 }
 .gallery-item.tall { grid-row: span 2; }
- 
+
 .gallery-item img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform .35s ease;
 }
 .gallery-item:hover img { transform: scale(1.04); }
- 
+
 /* placeholder state (no img yet) */
 .gallery-placeholder {
   aspect-ratio: 4/3; display: flex; flex-direction: column;
@@ -330,7 +330,7 @@ h2 {
   font-family: var(--mono); font-size: 9px;
   color: var(--muted); opacity: .55; text-align: center; line-height: 1.5;
 }
- 
+
 .gallery-caption {
   position: absolute; bottom: 0; left: 0; right: 0;
   padding: .5rem .7rem;
@@ -340,7 +340,7 @@ h2 {
   pointer-events: none;
 }
 .gallery-item:hover .gallery-caption { opacity: 1; }
- 
+
 /* lightbox */
 #lightbox {
   display: none; position: fixed; inset: 0; z-index: 200;
@@ -365,7 +365,7 @@ h2 {
   font-family: var(--sans); font-size: 13px; color: rgba(255,255,255,0.75);
   text-align: center; padding: 0 2rem;
 }
- 
+
 /* FOOTER */
 footer {
   padding: 1.8rem var(--pad);
@@ -375,18 +375,18 @@ footer {
   flex-wrap: wrap; gap: .5rem;
   max-width: calc(var(--max) + 8rem); margin: 0 auto;
 }
- 
+
 /* FADE-IN */
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
- 
+
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--bg2); border-radius: 3px; }
 </style>
 </head>
 <body>
- 
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#hero">shaoheng xu</a>
@@ -397,11 +397,11 @@ footer {
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
- 
+
 <!-- HERO -->
 <div id="hero" class="wrap">
   <div class="hero-grid">
- 
+
     <div class="photo-slot">
       <div class="photo-frame">
         <!-- REPLACE THIS BLOCK with your photo:
@@ -414,7 +414,7 @@ footer {
       </div>
       <div class="photo-hint">your photo here</div>
     </div>
- 
+
     <div>
       <div class="hero-affil">PhD Candidate · The Australian National University</div>
       <h1>Shaoheng Xu</h1>
@@ -429,10 +429,10 @@ footer {
         <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=HnOsHrsAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
       </div>
     </div>
- 
+
   </div>
 </div>
- 
+
 <!-- ABOUT -->
 <div id="about" class="sec wrap">
   <div class="section-label fade-in">About</div>
@@ -475,19 +475,17 @@ footer {
     </div>
   </div>
 </div>
- 
+
 <!-- PUBLICATIONS -->
 <div id="publications" class="sec wrap" style="background:var(--surface); max-width:100%; padding-left:0; padding-right:0;">
   <div style="max-width:calc(var(--max) + 8rem); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);">
     <div class="section-label fade-in">Research Output</div>
     <h2 class="fade-in">Publications</h2>
     <div class="pub-list">
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <!-- REPLACE with: <img src="teasers/rir-former.png" alt="RIR-FORMER teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;"> -->
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/icassp2026.png" alt="RIR-FORMER teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -499,11 +497,10 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.1109/ICASSP55912.2026.11462487" target="_blank" rel="noopener">doi: 10.1109/ICASSP55912.2026.11462487 ↗</a>
         </div>
       </div>
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/apsipa2025.png" alt="3D gradient-based sound source tracking teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -515,11 +512,10 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.1109/APSIPAASC65261.2025.11249221" target="_blank" rel="noopener">doi: 10.1109/APSIPAASC65261.2025.11249221 ↗</a>
         </div>
       </div>
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/icassp2024.png" alt="Sparse sound field complex OMP teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -531,11 +527,10 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.1109/ICASSP48485.2024.10445940" target="_blank" rel="noopener">doi: 10.1109/ICASSP48485.2024.10445940 ↗</a>
         </div>
       </div>
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/iwaenc2024.png" alt="Iterative complex OMP broadband sound field teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -547,11 +542,10 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.1109/IWAENC61483.2024.10694286" target="_blank" rel="noopener">doi: 10.1109/IWAENC61483.2024.10694286 ↗</a>
         </div>
       </div>
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/ssh.png" alt="Spherical sector harmonics teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -564,11 +558,10 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.3390/app142210633" target="_blank" rel="noopener">doi: 10.3390/app142210633 ↗</a>
         </div>
       </div>
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/icasspw2024.png" alt="Narrowband source localization teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -580,11 +573,10 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.1109/ICASSPW62465.2024.10627696" target="_blank" rel="noopener">doi: 10.1109/ICASSPW62465.2024.10627696 ↗</a>
         </div>
       </div>
- 
+
       <div class="pub-card fade-in">
         <div class="pub-teaser">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3558" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <div class="pub-teaser-hint">teaser image</div>
+          <img src="images/fa2023.png" alt="Virtual navigation distributed sound sources teaser" style="width:100%;height:100%;object-fit:cover;border-radius:3px;">
         </div>
         <div>
           <div class="pub-meta">
@@ -596,17 +588,17 @@ footer {
           <a class="pub-doi" href="https://doi.org/10.61782/fa.2023.0942" target="_blank" rel="noopener">doi: 10.61782/fa.2023.0942 ↗</a>
         </div>
       </div>
- 
+
     </div>
   </div>
 </div>
- 
+
 <!-- EXPERIENCE -->
 <div id="experience" class="sec wrap">
   <div class="section-label fade-in">Work History</div>
   <h2 class="fade-in">Experience</h2>
   <div class="exp-list">
- 
+
     <div class="exp-item fade-in">
       <div class="exp-period">Jul – Nov 2025</div>
       <div>
@@ -615,7 +607,7 @@ footer {
         <div class="exp-desc">Designed and developed a spatial audio renderer supporting binaural and surround formats for one of the world's largest music streaming platforms.</div>
       </div>
     </div>
- 
+
     <div class="exp-item fade-in">
       <div class="exp-period">Aug 2021 – present</div>
       <div>
@@ -624,7 +616,7 @@ footer {
         <div class="exp-desc">Researching audio and acoustic signal processing: sparse sound field reconstruction, continuous RIR estimation with transformer networks, and 3D multi-source tracking.</div>
       </div>
     </div>
- 
+
     <div class="exp-item fade-in">
       <div class="exp-period">Feb 2020 – present</div>
       <div>
@@ -643,7 +635,7 @@ footer {
         </div>
       </div>
     </div>
- 
+
     <div class="exp-item fade-in">
       <div class="exp-period">Nov 2019 – Feb 2020</div>
       <div>
@@ -651,7 +643,7 @@ footer {
         <div class="exp-place">Wocaring Medical Equipment Co., Ltd. · Beijing</div>
       </div>
     </div>
- 
+
     <div class="exp-item fade-in">
       <div class="exp-period">Feb – Mar 2017</div>
       <div>
@@ -659,10 +651,10 @@ footer {
         <div class="exp-place">Ninebot (Beijing) Tech Co., Ltd. · Beijing</div>
       </div>
     </div>
- 
+
   </div>
 </div>
- 
+
 <!-- AWARDS -->
 <div id="awards" class="sec wrap" style="background:var(--surface); max-width:100%; padding-left:0; padding-right:0;">
   <div style="max-width:calc(var(--max) + 8rem); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);">
@@ -691,7 +683,7 @@ footer {
         </div>
       </div>
     </div>
- 
+
     <div class="section-label fade-in" style="margin-top:2.2rem; margin-bottom:.45rem;">PhD Supervisors</div>
     <div class="supervisors-grid">
       <div class="supervisor-card fade-in">
@@ -712,7 +704,7 @@ footer {
     </div>
   </div>
 </div>
- 
+
 <!-- CONTACT -->
 <div id="contact" class="sec wrap" style="text-align:center;">
   <div class="contact-inner">
@@ -728,14 +720,14 @@ footer {
     </div>
   </div>
 </div>
- 
+
 <!-- GALLERY -->
 <div id="gallery" class="sec wrap">
   <div class="section-label fade-in">Personal</div>
   <h2 class="fade-in">Photos</h2>
- 
+
   <div class="gallery-grid">
- 
+
     <!-- Item 1 — tall portrait slot -->
     <div class="gallery-item tall fade-in" onclick="openLightbox(this)">
       <!-- To use your photo: remove the .gallery-placeholder div below and add:
@@ -750,7 +742,7 @@ footer {
         <div class="gallery-placeholder-hint">photo 1<br>tall slot</div>
       </div>
     </div>
- 
+
     <!-- Item 2 -->
     <div class="gallery-item fade-in" onclick="openLightbox(this)">
       <div class="gallery-placeholder">
@@ -761,7 +753,7 @@ footer {
         <div class="gallery-placeholder-hint">photo 2</div>
       </div>
     </div>
- 
+
     <!-- Item 3 -->
     <div class="gallery-item fade-in" onclick="openLightbox(this)">
       <div class="gallery-placeholder">
@@ -772,7 +764,7 @@ footer {
         <div class="gallery-placeholder-hint">photo 3</div>
       </div>
     </div>
- 
+
     <!-- Item 4 -->
     <div class="gallery-item fade-in" onclick="openLightbox(this)">
       <div class="gallery-placeholder">
@@ -783,7 +775,7 @@ footer {
         <div class="gallery-placeholder-hint">photo 4</div>
       </div>
     </div>
- 
+
     <!-- Item 5 -->
     <div class="gallery-item fade-in" onclick="openLightbox(this)">
       <div class="gallery-placeholder">
@@ -794,9 +786,9 @@ footer {
         <div class="gallery-placeholder-hint">photo 5</div>
       </div>
     </div>
- 
+
   </div>
- 
+
   <p style="margin-top:1.4rem;font-family:var(--mono);font-size:10px;color:var(--muted);opacity:.6;line-height:1.8;">
     To add photos: replace each <code>.gallery-placeholder</code> div with
     <code>&lt;img src="photos/file.jpg" alt="caption"&gt;</code>
@@ -804,26 +796,26 @@ footer {
     Item 1 uses <code>class="gallery-item tall"</code> for a portrait-oriented slot.
   </p>
 </div>
- 
+
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox(event)">
   <button id="lightbox-close" aria-label="Close">×</button>
   <img id="lightbox-img" src="" alt="">
   <div id="lightbox-caption"></div>
 </div>
- 
+
 <!-- FOOTER -->
 <footer>
   <div>Shaoheng Xu · PhD Candidate, ANU · Audio &amp; Acoustic Signal Processing</div>
   <div>© 2026</div>
 </footer>
- 
+
 <script>
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
- 
+
 function openLightbox(item) {
   const img = item.querySelector('img');
   if (!img) return;
