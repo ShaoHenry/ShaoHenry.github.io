@@ -1,26 +1,26 @@
-# Shaoheng Xu — Personal Academic Website
+# Shaoheng Xu — Personal Website
 
-This repository hosts my personal academic website using GitHub Pages.
+This repository hosts my personal academic website.
 
-**Live site:** https://shaohenry.github.io
+Website: https://shaohenry.github.io
 
 ## About
 
-I am a PhD candidate at The Australian National University working on audio and acoustic signal processing, with research interests in spatial audio rendering, sound field reconstruction, room impulse response estimation, and acoustic source localization/tracking.
+I am a PhD candidate at The Australian National University working on audio and acoustic signal processing.
+
+My research interests include spatial audio rendering, sound field reconstruction, room impulse response estimation, and acoustic source localization/tracking.
+
+## Contents
 
 The website includes:
 
-- Biography and research interests
+- Biography
+- Research interests
 - Publications
-- Research and industry experience
+- Experience
 - Awards and honours
 - Contact information
-- Links to GitHub and Google Scholar
 
-## Repository Structure
+## Contact
 
-```text
-.
-├── index.html        # Main website page
-├── README.md         # Repository documentation
-└── images/           # Website images and publication figures
+For more information, please visit: https://shaohenry.github.io
