@@ -247,6 +247,24 @@ h2 {
 @media (max-width: 520px) { .exp-item { grid-template-columns: 1fr; gap: .35rem; } }
 .exp-period { font-family: var(--mono); font-size: 10px; color: var(--muted); padding-top: .2rem; line-height: 1.7; }
 .exp-role { font-weight: 500; font-size: .93rem; margin-bottom: .15rem; }
+
+.exp-role-row {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin-bottom: .15rem;
+}
+.exp-role-row .exp-role {
+  margin-bottom: 0;
+}
+.exp-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: .85;
+}
+
 .exp-place { font-size: .82rem; color: var(--navy); margin-bottom: .45rem; font-style: italic; }
 .exp-desc { font-size: .86rem; color: var(--muted); line-height: 1.75; }
 .exp-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .65rem; }
@@ -472,7 +490,7 @@ footer {
   <div class="about-grid">
     <div class="about-text fade-in">
       <p>
-        I am a PhD candidate in the <a href="https://engineering.anu.edu.au" target="_blank" rel="noopener">Research School of Engineering</a> at the Australian National University, supervised by Prof. Thushara Abhayapala, Dr. Jihui (Aimee) Zhang, and Prof. Prasanga Samarasinghe.
+        I am a PhD candidate in the <a href="https://eng.anu.edu.au" target="_blank" rel="noopener">Research School of Engineering</a> at the Australian National University, supervised by Prof. Thushara Abhayapala, Dr. Jihui (Aimee) Zhang, and Prof. Prasanga Samarasinghe.
       </p>
       <p>
         My research focuses on audio and acoustic signal processing — in particular, how to represent, decompose, and reconstruct sound fields from sparse microphone observations, how to render immersive spatial audio for binaural and surround playback, and how to track moving sound sources in dynamic acoustic environments.
@@ -645,16 +663,45 @@ footer {
     <div class="exp-item fade-in">
       <div class="exp-period">Jul – Nov 2025</div>
       <div>
+        <!--
         <div class="exp-role">Audio Effects Development Intern</div>
+        -->
+        <div class="exp-role-row">
+          <img class="exp-icon" src="images/icons/tme.png" alt="Tencent Music Entertainment logo">
+          <div class="exp-role">Audio Effects Development Intern</div>
+        </div>
         <div class="exp-place">QQ Music · Tencent Music Entertainment Group · Shenzhen</div>
         <div class="exp-desc">Designed and developed a spatial audio renderer supporting binaural and surround formats for one of the world's largest music streaming platforms.</div>
       </div>
     </div>
 
     <div class="exp-item fade-in">
+      <div class="exp-period">Apr 2026</div>
+      <div>
+        <!--
+        <div class="exp-role">Guest Lecturer</div>
+        -->
+        <div class="exp-role-row">
+          <img class="exp-icon" src="images/icons/anu.png" alt="Australian National University logo">
+          <div class="exp-role">Guest Lecturer</div>
+        </div>
+        <div class="exp-place">ENGN2218 Electronic Systems and Design · The Australian National University</div>
+        <div class="exp-desc">
+          Delivered a guest lecture introducing audio and acoustic signal processing as a signal chain, from sound field measurement using microphones and transducers, through filtering, ADC/DAC, and digital signal processing, to acoustic output.
+        </div>
+      </div>
+    </div>
+    
+    <div class="exp-item fade-in">
       <div class="exp-period">Aug 2021 – present</div>
       <div>
+        <!--
         <div class="exp-role">PhD Candidate</div>
+        -->
+        <div class="exp-role-row">
+          <img class="exp-icon" src="images/icons/anu.png" alt="Australian National University logo">
+          <div class="exp-role">PhD Candidate</div>
+        </div>
         <div class="exp-place">Research School of Engineering · The Australian National University</div>
         <div class="exp-desc">Researching audio and acoustic signal processing, with a focus on sparse sound field decomposition and reconstruction, spatial audio rendering, continuous RIR reconstruction using transformer networks, and 3D tracking of multiple moving sound sources.</div>
       </div>
@@ -663,7 +710,13 @@ footer {
     <div class="exp-item fade-in">
       <div class="exp-period">Feb 2020 – present</div>
       <div>
+        <!--
         <div class="exp-role">Teaching Assistant</div>
+        -->
+        <div class="exp-role-row">
+          <img class="exp-icon" src="images/icons/anu.png" alt="Australian National University logo">
+          <div class="exp-role">Teaching Assistant</div>
+        </div>
         <div class="exp-place">School of Engineering · The Australian National University</div>
         <div class="exp-desc">Supporting undergraduate and postgraduate students across eight engineering courses.</div>
         <div class="exp-tags">
@@ -690,20 +743,15 @@ footer {
     -->
 
     <div class="exp-item fade-in">
-      <div class="exp-period">Apr 2026</div>
-      <div>
-        <div class="exp-role">Guest Lecturer</div>
-        <div class="exp-place">ENGN2218 Electronic Systems and Design · The Australian National University</div>
-        <div class="exp-desc">
-          Delivered a guest lecture introducing audio and acoustic signal processing as a signal chain, from sound field measurement using microphones and transducers, through filtering, ADC/DAC, and digital signal processing, to acoustic output.
-        </div>
-      </div>
-    </div>
-
-    <div class="exp-item fade-in">
       <div class="exp-period">Feb – Mar 2017</div>
       <div>
+        <!--
         <div class="exp-role">R&amp;D Intern</div>
+        -->
+        <div class="exp-role-row">
+          <img class="exp-icon" src="images/icons/ninebot.png" alt="Ninebot logo">
+          <div class="exp-role">R&amp;D Intern</div>
+        </div>
         <div class="exp-place">Ninebot (Beijing) Tech Co., Ltd. · Beijing</div>
       </div>
     </div>
